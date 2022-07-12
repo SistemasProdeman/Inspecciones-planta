@@ -1,0 +1,80 @@
+
+
+.bgpop{
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background-color: rgb(0, 0, 0, 0.6);
+    z-index: 999;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bgpopFardos{
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background-color: rgb(0, 0, 0, 0.6);
+    z-index: 999;
+    padding-left: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.backTable{
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+
+.customScroll{
+    overflow-y:scroll;
+}
+
+.customScroll::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}.customScroll::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+.customScroll::-webkit-scrollbar-thumb:hover {
+    background: #b3b3b3;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+.customScroll::-webkit-scrollbar-thumb:active {
+    background-color: #999999;
+}
+.customScroll::-webkit-scrollbar-track {
+    background: #e1e1e1;
+    border-radius: 4px;
+}
+.customScroll::-webkit-scrollbar-track:hover,
+.customScroll::-webkit-scrollbar-track:active {
+    background: #d4d4d4;
+}
+
+.SelectedPanel{
+    text-shadow: 2px 2px 3px black;
+}
+
+.ModalCss{
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background-color: rgb(0, 0, 0, 0.6);
+    z-index: 9999999;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
