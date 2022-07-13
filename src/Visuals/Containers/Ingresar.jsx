@@ -145,7 +145,7 @@ function Ingresar() {
              timer: 1500
          })
 
-         response.msg==='Algo salio mal' && await Swal.fire({
+         response.msg==='Algo salió mal' && await Swal.fire({
              position: 'center',
              icon: 'warning',
              title: 'Algo salió mal',
