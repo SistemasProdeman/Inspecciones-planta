@@ -2,7 +2,7 @@ import React from 'react';
 import "@material-tailwind/react/tailwind.css";
 import './index.css'
 import { Route, Switch  } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+//import { useSelector } from 'react-redux';
 import Menu from './Containers/Menu';
 import NuevoRegistro from './Containers/NuevoRegistro';
 import Rsu from './Containers/Rsu';
@@ -19,7 +19,7 @@ import Botonera from './Containers/Botonera';
 
 function App() {
 
-  const userLog = useSelector(state => state.sessionReducer.userState)
+//  const userLog = useSelector(state => state.sessionReducer.userState)
 
   return (
     <div>

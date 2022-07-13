@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { sendLogin } from '../../ApiSend/sendLogin'
-import { setSectores, setUsuarios } from '../../Controllers/actions/userActions'
+//import { setSectores, setUsuarios } from '../../Controllers/actions/userActions'
 
 
 
@@ -20,6 +20,33 @@ function Ingresar() {
 
     const dispatch = useDispatch()
     const userLog = useSelector(state => state.sessionReducer.userState)
+
+    const [redireccion, setRedireccion] = useState(false)
+
+    //const [userField, setUserField] = useState('')
+    //const [passField, setPassField] = useState('')
+
+    const [credentials, setCredentials] = useState({
+        user:'', 
+        pass:''
+    })
+
+    const handleChange = (e) => {
+
+        let { name, value } = e.target;
+
+        name === 'user' && setCredentials({
+            ...credentials,
+            user: value
+        })
+
+        name === 'pass' && setCredentials({
+            ...credentials,
+            pass: value
+        })
+
+      //  props.check(name, value);
+    }
 
     // const [fieldState, setFieldState] = useState({ 
     //     user: false,
@@ -87,49 +114,60 @@ function Ingresar() {
 
     //const sendCarga =()=>{}
 
-    //const tryLogin=async()=>{
+    const login = async () => {
+        await Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Bienvenid@ de nuevo',
+                    showConfirmButton: false,
+                    timer: 1500
+            })
+            setRedireccion(true)
+    }
 
-        // const response = await sendCarga(fieldState.userField, fieldState.passField)
+    const tryLogin=async()=>{
+
+         const response = await sendLogin(credentials.user, credentials.pass)
         
-        // response?.msg==='Usuario inexistente' && await Swal.fire({
-        //     position: 'center',
-        //     icon: 'error',
-        //     title: 'Usuario no registrado',
-        //     showConfirmButton: false,
-        //     timer: 1500
-        // })
+         response?.msg==="Faltan datos - username, password" && await Swal.fire({
+             position: 'center',
+             icon: 'error',
+             title: 'Faltan datos',
+             showConfirmButton: false,
+             timer: 1500
+         })
 
-        // response.msg==='Datos Incorrectos' && await Swal.fire({
-        //     position: 'center',
-        //     icon: 'warning',
-        //     title: 'Datos incorrectos',
-        //     showConfirmButton: false,
-        //     timer: 1500
-        // })
+         response.msg==="Usuario inexistente en base de datos" && await Swal.fire({
+             position: 'center',
+             icon: 'warning',
+             title: 'Usuario inexistente en base de datos',
+             showConfirmButton: false,
+             timer: 1500
+         })
 
-        // response.msg==='Algo salio mal' && await Swal.fire({
-        //     position: 'center',
-        //     icon: 'warning',
-        //     title: 'Algo salio mal',
-        //     showConfirmButton: false,
-        //     timer: 1500
-        // })
-        
-    //}
+         response.msg==='Algo salio mal' && await Swal.fire({
+             position: 'center',
+             icon: 'warning',
+             title: 'Algo salió mal',
+             showConfirmButton: false,
+             timer: 1500
+         })
+        response.msg==='Correcto' && login()
+    }
+ 
 
-    const logIn =()=>{
+    /* const logIn =()=>{
         dispatch(setUsuarios())
         dispatch(setSectores())
-        sendLogin();
+        sendLogin(credentials.user, credentials.pass);
         //dispatch(setLogin({username, access, id}))
         // dispatch(setEncargados())
         // dispatch(setEmpresas())
         // dispatch(setPlantas())
-        setRedireccion(true)
-    }
+        setRedireccion(false)
+    } */
 
     
-    const [redireccion, setRedireccion] = useState(false)
 
 
     return (
@@ -141,15 +179,15 @@ function Ingresar() {
                 <div className='flex flex-col justify-center items-center my-10'>
                     <span   className=' text-xl font-semibold tracking-wider text-gray-700'
                         >Usuario</span>
-                    <input  className='rounded-xl'
+                    <input  className='rounded-xl' name='user' onChange={handleChange}
                         />
                     <span   className=' text-xl font-semibold tracking-wider text-gray-700'
                         >Contraseña</span>
-                    <input  className='rounded-xl'
+                    <input  className='rounded-xl' type='password' name='pass' onChange={handleChange}
                         />
                 </div>
                 <div>
-                    <button onClick={logIn}
+                    <button onClick={tryLogin}
                         className='w-44 h-10  rounded-2xl bg-brown-200 hover:bg-greenClass cursor-pointer font-bold tracking-widest focus:outline-none'
 
                     >INGRESAR</button>
